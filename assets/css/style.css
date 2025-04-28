@@ -1,0 +1,683 @@
+/* celebrar */
+:root{
+    
+    --blanco: #e0e0e0;
+    --blanco-2: rgba(255,255,255,.2);
+    --negro: black;
+    --negro-5:rgba(0,0,0,0.5);
+    --negro-7: rgba(0,0,0,0.75);
+    --tipo-titular:'charmonman';
+    --tipo-principal:'Inter', sans-serif;
+    
+}
+*{
+    margin: 0;
+    padding: 0;
+    border: 0;
+    box-sizing: border-box;
+    vertical-align: baseline;
+}
+
+img, figure{
+    max-width: 100%;
+    width: 100%;
+    object-fit: cover;
+    object-position: center center;
+   
+}
+h1,h2,h3,h4,h5,h6 {
+    color: inherit;
+    font-weight: inherit;
+    font-size: inherit;
+    font-family: var(--tipo-titular);
+}
+.container{
+    background-color: #eeeee0;
+}
+ 
+.titulo{
+    background-image: url(/principal2.jpeg) ;
+    height: 100vh;
+    width: 100vw;
+    background-size: cover;
+    background-position: center top;
+    background-repeat: no-repeat;
+    background-attachment: auto;
+    filter: grayscale(90%);
+}
+  
+
+.titulo h1{
+    font-size: 4.375em;
+    color: #fbf8f8;
+    justify-content: center;
+    display: flex;
+    padding: 4em;
+    font-family: var(--tipo-titular);
+    text-align: center;
+}
+
+
+.nav{
+    background-color: #e2c595a2;
+    padding: 1em 2em;  
+}
+
+.nav .ul{
+display: flex;
+flex-flow: row wrap;
+justify-content: space-around;
+align-items: center;
+margin: 0.9375em;
+}
+.nav .li{
+    margin: 0 1em;
+    display: flex;
+    align-items: center;
+    font-family: var(--tipo-titular);
+}
+
+.nav h2{
+    font-size: 1.875em;
+    display: flex;
+    justify-content: center; 
+    font-family: var(--tipo-titular);
+}
+.nav .a{
+    color: black;
+    background-image: linear-gradient(90deg, #000, #000, #000);
+    text-decoration: none;  
+    cursor: pointer;
+    background-repeat: no-repeat;
+    background-size: 0% 0.0625em;
+    background-position: left bottom;
+    transition: background-size 700ms ease-in-out;
+}
+.nav .a:hover{
+background-size: 100% 0.0625em;
+}
+.fecha{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.fecha h3{
+    font-size: 1.875em;
+}
+.fecha h2{
+    font-size: 4.375em;
+    
+}
+.fecha img{
+    width: auto;
+    height: 30vh;
+    margin-bottom: 4.375em;
+    margin-left: 2em;
+}
+.fecha .mes{
+padding: 1em;
+}
+.celebrar{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.celebrar h2{
+    margin: 2em;
+    font-size: 3.125em;
+}
+.celebrar img{
+    width: 30vw;
+    height: 70vh;
+    box-shadow: 0 0 0.5em 0.5em; 
+}
+.descripcion{
+    font-size: 1.6875em;
+    padding: 5% 20%;
+    font-family: var(--tipo-titular);
+    text-align: center;
+    
+}
+
+.finca img{
+    width: 100%;
+    height: 60vh;
+    object-position: bottom;   
+}
+footer{
+    font-family: var(--tipo-titular);
+    font-size: 1.25em;
+    padding: 0.625em 3.125em;
+    background-color: #e2c595a2;
+    
+}
+.arrow{
+    display: block;
+    color:  #e2c595a2;
+    position: fixed;
+    bottom: 6.25rem;
+    right: 1.25rem;
+    z-index: 2;
+    font-size: 3.125em;
+    scroll-behavior: smooth;
+}
+.btn-scrolltop{
+    position: fixed;
+    bottom: 1.25em;
+    right: 1.25em;
+    padding: 0.9375em 1.25em;
+    background:#e2c595a2;
+    color: white;
+    border: 0.0625em solid white;
+    border-radius: 100%;
+    cursor: pointer;
+    transform: translateY(6.25em);
+    transition: 0.3s;
+    z-index: 1000;
+}
+.btn-scrolltop-on{
+    transform: translateY(0);
+
+}
+/* fin celebrar */
+/* boda */
+.direccion{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-left: 80vh;
+    margin-bottom: 6vh;
+
+}
+.direccion h2{
+    margin: 0.3125em;
+}
+.boda{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.boda h2{
+    margin: 2em;
+    margin-bottom: -.5em;
+    font-size: 3.125em;
+    
+}
+.lugar{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-left: 5vh;
+    font-size: 3vh;
+
+}
+.hora{
+    display: flex;
+    flex-direction: row;
+}
+.hora i{
+    margin-top: 1.5vh;
+}
+.direccion .calendario{
+    margin-top: 2vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    margin-left: .1%;
+}
+.calendario h2{
+    margin-top: -.3em;
+    margin-bottom: -.3em;
+    font-size: 5em;
+}
+.calendario h3{
+    font-size: 1.875em;
+}
+
+
+/* fin boda*/
+/* confirma asistencia*/
+
+.asistencia{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.asistencia h2{
+    margin: 2em;
+    margin-bottom: -.25em;
+    font-size: 3em;
+    font-family: var(--tipo-titular);
+}
+.descripcion h2{
+    margin: 1.5em;
+    font-size: 1.5em;
+    font-family: var(--tipo-titular);
+}
+.asistencia img{
+    margin-top: -4vw;
+}
+
+/* fin confirma asistencia*/
+/*direcciones de interés*/
+
+.direcciones{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.direcciones h2{
+    margin: 2em;
+    margin-bottom: -1.25em;
+    font-size: 3.125em;
+    font-family: var(--tipo-titular);
+}
+
+.container .direcciones .foto{
+   width: 70%;
+   height: 20em;
+  
+}
+.container .direcciones img{
+    height: 30vw;
+    width: 30vw;
+    margin-left: 15vw;
+    margin-top: 5vw;
+    background: white;
+    padding: 1.25em;
+    box-shadow: 0.3125em 0.625em 1.875em rgba(0, 0, 0, 0.3);
+    display: block;
+    transform: rotate(-5deg);
+}
+
+.direcciones h3{
+    padding-bottom: 1vw;
+}
+.direcciones a{
+    margin-left: 1vw;
+}
+
+/* fin direcciones de interes*/
+/* contacta con nosotros*/
+.contacta{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.flores{
+    width: 40vw;
+    margin-left: 2vw;
+    
+}
+.contacta h2{
+    margin: 1em;
+    margin-top: -2vw;
+    font-size: 1.875em;
+}
+.contacta h3{
+    font-size: 1em;
+    
+}
+
+/* fin contacta con nosotros*/
+/* libro de visitas*/
+.libro{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+.libro h2{
+    font-size: 3em;
+}
+.comentarios h3{
+    margin-top: 1em;
+    margin-bottom: 3vw;
+    font-size: 1.5em;
+}
+
+form {
+    background: white;
+    padding: 1.25em;
+    border-radius: 0.625em;
+    box-shadow: 0 0.25em 0.625em rgba(0, 0, 0, 0.1);
+    max-width: 25em;
+    margin: auto;
+}
+
+input, textarea {
+    width: 100%;
+    padding: 0.625em;
+    margin: 0.625em 0;
+    border: 0.0625em solid #ccc;
+    border-radius: 0.3125em;
+    font-size: 1em;
+    font-family: var(--tipo-titular);
+}
+
+button {
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    padding: 0.625em 0.9375em;
+    font-size: 1em;
+    border-radius: 0.3125em;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+#comentarios {
+    max-width: 31.25em;
+    margin: 1.25em auto;
+    text-align: left;
+}
+
+#comentarios p {
+    background: white;
+    padding: 0.625em;
+    border-radius: 0.3125em;
+    box-shadow: 0 0.125em 0.3125em rgba(0, 0, 0, 0.1);
+    margin-bottom: 0.625em;
+}
+
+#comentarios strong {
+    color: #007BFF;
+}
+.comentarios h2{
+    font-size: 2.5em;
+    display: flex;
+    justify-content: center; 
+    font-family: var(--tipo-titular);
+    margin-top: 1em;
+}
+.logo{ 
+    height: 20em;
+    width: 12.5em;
+    margin-left: 43%;
+    margin-top: -2em;
+    margin-bottom: -2em;
+    
+}
+.adorno{
+    width: 40vw;
+    margin-left: 2vw;
+    margin-top: 2em;
+}
+/* Contenedor de los mensajes */
+#mensajes {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5em;
+    margin-top: 3em;
+  
+  }
+  
+  /* Estilo de cada mensaje */
+  .mensaje {
+    
+    
+    font-size: 1.5em;
+    line-height: 1.6;
+    color: #333;
+    margin-bottom: 5em;
+    font-family: var(--tipo-titular);
+  }
+  
+  /* Estilo para el nombre del usuario */
+  .mensaje strong {
+    font-weight: bold;
+    font-size: 1.1em;
+    color: #1f1f1f;
+  }
+  
+  /* Estilo para la fecha */
+  .mensaje .fecha {
+    font-size: 0.9em;
+    color: #888;
+    margin-top: 5px;
+  }
+  
+  /* Estilo del mensaje */
+  .mensaje p {
+    margin: 0;
+  }
+  
+  /* Modificar el aspecto de los mensajes cuando son enviados */
+  .mensaje.nuevo {
+    background-color: #e9f7ef;
+    border-left: 5px solid #1abc9c;
+  }
+  
+/* fin boda*/
+/*media*/
+
+@media screen and (max-width: 768px){
+    
+    .logo{   
+        margin-left: 37%;  
+    }
+
+    .titulo h1{
+        font-size: 5em; 
+    }
+   
+    .celebrar img{
+        width: 70vw;
+    }
+    .fecha img{
+        margin-left: 2.5em;
+    }
+    
+    .finca img{
+        height: 40vh;   
+    }
+    
+    /* boda */
+   
+    .boda h2{
+        margin: 2em;
+        margin-bottom: -.1em;
+    }
+    .hora i{
+        margin-top: 1.5vh;
+    }
+    .direccion .calendario{
+        margin-left: -42em;
+    }
+    
+    .calendario h2{
+        margin-top: -.3em;
+        margin-bottom: -.3em;
+        font-size: 6em;
+    }
+    .calendario h3{
+        font-size: 3em;
+    }
+    .fecha .rama{
+        margin-right: 2em;
+    }
+    .btn-scrolltop{
+       margin-right: 3em;
+    }
+    /* fin boda*/
+/* confirma asistencia*/
+
+.asistencia h2{
+    font-size: 2.5em;
+}
+.descripcion h2{
+    margin-top: 5em;
+    font-size: 1.2em;
+}
+
+.asistencia img{
+   margin-right: 2em;
+}
+
+/* fin confirma asistencia*/
+/*direcciones de interés*/
+
+.direcciones h2{
+    margin: 2em;
+    margin-bottom: -.25em;
+    font-size: 2.5em;
+}
+
+.container .direcciones .foto{
+    width: 80%;
+    height: 40vw;
+    margin-top: 3em;
+}
+
+/* fin direcciones de interes*/
+/* contacta con nosotros*/
+
+
+.contacta h2{
+    margin: 1em;
+    margin-top: -2vw;
+    font-size: 1.875em;
+}
+.nav .ul{
+    justify-content: center;
+    }
+.flores{
+        width: 70vw;
+    }
+/* fin contacta con nosotros*/
+
+@media screen and (max-width: 480px) {
+    
+    .logo{   
+        margin-left: 17%;  
+    }
+    
+
+    .titulo h1{
+        font-size: 3em; 
+    }
+    .fecha img{
+        height: 20vh;
+        margin-right: 2em;
+        margin-top: 3em;
+        
+    }
+   
+    .celebrar img{
+        width: 70vw;
+    }
+    .fecha h3{
+        font-size: 1.875em;
+    }
+    .fecha h2{
+        font-size:2em;  
+    }
+    
+    .celebrar h2{
+        
+        font-size: 2.5em;
+    }
+    .descripcion{
+        font-size: 1em;
+        margin-top: 2em;
+    }
+    
+    .finca img{
+        height: 30vh;  
+    }
+    footer{
+       text-align: center;
+        
+    }
+    /*fin a celebrar*/
+    /*la boda*/
+    .boda h2{
+        font-size: 2em;
+    }
+    .lugar{
+     margin-left:1.7em;
+            font-size: 1em;
+        
+    }
+    .hora i{
+        margin-top: 1.5vh;
+    }
+    .direccion .calendario{
+        margin-left: -30em;
+    }
+    
+    .calendario h2{
+        font-size: 2em;
+    }
+    .calendario h3{
+        font-size: 2em;
+    }
+    .fecha .rama{
+        margin-right: 2em;
+       margin-top: -2em;
+    }
+    
+    /*fin la boda*/
+/* confirma asistencia*/
+
+.asistencia h2{
+    font-size: 2em;
+    text-align: center;
+}
+.descripcion h2{
+    font-size: 1.5em;
+}
+.btn-scrolltop{
+    margin-right: 1em;
+ }
+/* fin confirma asistencia*/
+/*direcciones de interés*/
+
+.direcciones h2{
+    text-align: center;
+    font-size: 2em;
+}
+/* fin direcciones de interes*/
+/* contacta con nosotros*/
+
+
+.contacta h2{
+    font-size: 1.73em;
+}
+.flores img{
+    
+    margin-left:0.5em;
+        
+}
+
+/* fin contacta con nosotros*/
+/* libro de visitas*/
+
+.libro h2{
+    font-size: 2em;
+    margin-top: 2em;
+}
+.comentarios h3{
+    font-size: 1em;
+}
+.adorno {
+    height: 20vh;
+    width: 100vw;
+    margin-left:0.5em;
+    margin-top: 1em;
+}
+
+/* fin boda*/
+}
+}
+   
+
+    
+
+
+
