@@ -486,9 +486,9 @@ button:hover {
     .hora i{
         margin-top: 1.5vh;
     }
-    .direccion .calendario{
-        margin-left: -42em;
-    }
+   .direccion{
+    justify-content: center;
+   }
     
     .calendario h2{
         margin-top: -.3em;
