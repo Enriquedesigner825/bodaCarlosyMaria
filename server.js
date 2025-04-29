@@ -2,6 +2,8 @@ const express = require('express');
 const mysql = require('mysql2');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const path = require('path');
+
 require('dotenv').config();
 
 const app = express();
@@ -10,7 +12,7 @@ app.listen(PORT, () => {
   console.log(`Servidor escuchando en el puerto ${PORT}`);
 });
 app.get('/', (req, res) => {
-  res.send('¡Servidor funcionando correctamente!');
+  res.sendFile(path.join(__dirname, 'assets', 'acelebrar.html'));
 });
 
 
