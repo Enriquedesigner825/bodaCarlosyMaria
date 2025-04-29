@@ -185,7 +185,7 @@ footer{
     display: flex;
     flex-direction: row;
     align-items: center;
-    margin-left: 80vh;
+    justify-content: center;
     margin-bottom: 6vh;
 
 }
@@ -401,6 +401,7 @@ button:hover {
     margin-left: 43%;
     margin-top: -2em;
     margin-bottom: -2em;
+
     
 }
 .adorno{
@@ -486,9 +487,9 @@ button:hover {
     .hora i{
         margin-top: 1.5vh;
     }
-   .direccion{
-    justify-content: center;
-   }
+    .direccion{
+        
+    }
     
     .calendario h2{
         margin-top: -.3em;
@@ -554,7 +555,7 @@ button:hover {
 @media screen and (max-width: 480px) {
     
     .logo{   
-        margin-left: 17%;  
+        margin-left: 23%;  
     }
     
 
@@ -607,9 +608,7 @@ button:hover {
     .hora i{
         margin-top: 1.5vh;
     }
-    .direccion .calendario{
-        margin-left: -30em;
-    }
+    
     
     .calendario h2{
         font-size: 2em;
