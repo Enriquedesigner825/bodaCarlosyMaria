@@ -269,8 +269,8 @@ footer{
 
 .direcciones h2{
     margin: 2em;
-    margin-bottom: -1.25em;
-    font-size: 3.125em;
+    margin-bottom: -.25em;
+    font-size: 3em;
     font-family: var(--tipo-titular);
 }
 
@@ -308,6 +308,7 @@ footer{
 .flores{
     width: 40vw;
     margin-left: 2vw;
+    margin-top: 2em;
     
 }
 .contacta h2{
@@ -420,8 +421,6 @@ button:hover {
   
   /* Estilo de cada mensaje */
   .mensaje {
-    
-    
     font-size: 1.5em;
     line-height: 1.6;
     color: #333;
@@ -487,9 +486,6 @@ button:hover {
     .hora i{
         margin-top: 1.5vh;
     }
-    .direccion{
-        
-    }
     
     .calendario h2{
         margin-top: -.3em;
@@ -547,10 +543,17 @@ button:hover {
 .nav .ul{
     justify-content: center;
     }
-.flores{
+    .flores{
         width: 70vw;
-    }
+        }
 /* fin contacta con nosotros*/
+/*libro de visitas*/
+.adorno {
+    
+    width: 70vw;
+   
+}
+/*fin libro de visitas*/
 
 @media screen and (max-width: 480px) {
     
@@ -641,17 +644,18 @@ button:hover {
     text-align: center;
     font-size: 2em;
 }
+
 /* fin direcciones de interes*/
 /* contacta con nosotros*/
 
 
 .contacta h2{
     font-size: 1.73em;
-}
-.flores img{
     
-    margin-left:0.5em;
-        
+}
+.flores{
+    margin-left:0.5em;   
+    width: 45vh;
 }
 
 /* fin contacta con nosotros*/
@@ -671,7 +675,7 @@ button:hover {
     margin-top: 1em;
 }
 
-/* fin boda*/
+/* fin libro de visitas*/
 }
 }
    
