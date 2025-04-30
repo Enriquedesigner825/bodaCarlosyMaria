@@ -21,12 +21,13 @@ app.get('/', (req, res) => {
 
 // Conexión a la base de datos (variables de entorno)
 const db = mysql.createConnection({
-  host: process.env.DB_HOST,
-  user: process.env.DB_USER,
-  password: process.env.DB_PASS,
-  database: process.env.DB_NAME,
-  port: process.env.DB_PORT || 3306
+  host: process.env.DB_HOST,        // El host de la base de datos
+  user: process.env.DB_USER,        // El nombre de usuario de la base de datos
+  password: process.env.DB_PASS,    // La contraseña de la base de datos
+  database: process.env.DB_NAME,    // El nombre de la base de datos
+  port: process.env.DB_PORT || 3306 // El puerto, por defecto 3306
 });
+
 
 db.connect(err => {
   if (err) {
