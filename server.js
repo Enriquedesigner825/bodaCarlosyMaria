@@ -8,26 +8,24 @@ require('dotenv').config();
 
 const app = express();
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`Servidor escuchando en el puerto ${PORT}`);
-});
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'assets', 'acelebrar.html'));
-});
-
 
 // Middleware
 app.use(cors());
 app.use(bodyParser.json());
 app.use(express.static('assets'));
 
-// Conexión a la base de datos
+// Página principal
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'assets', 'acelebrar.html'));
+});
+
+// Conexión a la base de datos (variables de entorno)
 const db = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
-  password: '', // tu contraseña si la tienes
-  database: 'libro_boda',
-  port: 5500 // ¡el puerto que tú usaste en Workbench!
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASS,
+  database: process.env.DB_NAME,
+  port: process.env.DB_PORT || 3306
 });
 
 db.connect(err => {
@@ -38,7 +36,7 @@ db.connect(err => {
   console.log('Conexión a MySQL establecida');
 });
 
-// Ruta para recibir mensajes
+// Ruta para guardar mensaje
 app.post('/nuevo-mensaje', (req, res) => {
   const { nombre, mensaje } = req.body;
   const sql = 'INSERT INTO mensajes (nombre, mensaje) VALUES (?, ?)';
@@ -56,9 +54,9 @@ app.get('/mensajes', (req, res) => {
   });
 });
 
+// Solo un listen
 app.listen(PORT, () => {
-  console.log(`Servidor corriendo en http://localhost:${PORT}`);
+  console.log(`Servidor corriendo en el puerto ${PORT}`);
 });
-
 
 
