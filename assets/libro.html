@@ -61,53 +61,57 @@
                   </form>
                 
                   <h2>Mensajes:</h2>
-                  <div id="mensajes"></div>
+                  <div id="mensajes">
+                    <p>Juan: ¡Este es un mensaje de prueba! (Enviado el 2025-05-04 22:00:00)</p>
+                  </div>
+                  
                 
                   <script>
-                    // Al enviar el formulario, se agrega el mensaje
-                    document.getElementById('comentarioForm').addEventListener('submit', async (e) => {
-                      e.preventDefault();
-                  
-                      const nombre = document.getElementById('nombre').value;
-                      const mensaje = document.getElementById('mensaje').value;
-                  
-                      // Enviamos el mensaje al servidor
-                      await fetch('/nuevo-mensaje', {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({ nombre, mensaje })
-                      });
-                  
-                      // Limpiamos el formulario
-                      document.getElementById('nombre').value = '';
-                      document.getElementById('mensaje').value = '';
-                  
-                      // Volvemos a cargar los mensajes para mostrar el nuevo
-                      cargarMensajes();
-                    });
-                  
-                    // Función para cargar los mensajes desde el servidor
-                    async function cargarMensajes() {
-  const res = await fetch('/mensajes');
-  const data = await res.json(); // Asumimos que el backend devuelve los datos en formato JSON
-
-  const contenedorMensajes = document.getElementById('mensajes');
-  contenedorMensajes.innerHTML = ''; // Limpiar mensajes previos
-
-  // Iterar sobre los mensajes y mostrar en formato adecuado
-  data.forEach(mensaje => {
-    const mensajeElemento = document.createElement('p');
-    // Añadir clase para aplicar estilos
-    mensajeElemento.classList.add('mensaje');
-    mensajeElemento.textContent = `${mensaje.nombre}: ${mensaje.mensaje} (Enviado el ${new Date(mensaje.fecha).toLocaleString()})`;
-
-    contenedorMensajes.appendChild(mensajeElemento);
+                      // Al enviar el formulario, se agrega el mensaje
+  document.getElementById('comentarioForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    
+    const nombre = document.getElementById('nombre').value;
+    const mensaje = document.getElementById('mensaje').value;
+    
+    // Enviamos el mensaje al servidor
+    await fetch('/nuevo-mensaje', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ nombre, mensaje })
+    });
+    
+    // Limpiamos el formulario
+    document.getElementById('nombre').value = '';
+    document.getElementById('mensaje').value = '';
+    
+    // Volvemos a cargar los mensajes para mostrar el nuevo
+    cargarMensajes();
   });
-}
 
-                  
-                    // Cargar los mensajes al cargar la página
-                    cargarMensajes();
+  // Función para cargar los mensajes desde el servidor
+  async function cargarMensajes() {
+    const res = await fetch('/mensajes');
+    const data = await res.json(); // Asumimos que el backend devuelve los datos en formato JSON
+
+    console.log('Mensajes recibidos del servidor:', data);  // Asegúrate de que los datos sean correctos
+
+    const contenedorMensajes = document.getElementById('mensajes');
+    contenedorMensajes.innerHTML = ''; // Limpiar mensajes previos
+
+    // Iterar sobre los mensajes y mostrar en formato adecuado
+    data.forEach(mensaje => {
+      const mensajeElemento = document.createElement('p');
+      // Añadir clase para aplicar estilos
+      mensajeElemento.classList.add('mensaje');
+      mensajeElemento.textContent = `${mensaje.nombre}: ${mensaje.mensaje} (Enviado el ${new Date(mensaje.fecha).toLocaleString()})`;
+
+      contenedorMensajes.appendChild(mensajeElemento);
+    });
+  }
+
+  // Cargar los mensajes al cargar la página
+  cargarMensajes();
                   </script>
                   
                 </div>

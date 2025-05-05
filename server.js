@@ -40,16 +40,20 @@ db.connect(err => {
 // Ruta para guardar mensaje
 app.post('/nuevo-mensaje', (req, res) => {
   const { nombre, mensaje } = req.body;
-  const sql = 'INSERT INTO mensajes (nombre, mensaje) VALUES (?, ?)';
+  const sql = 'INSERT INTO libro_boda (nombre, mensaje, fecha) VALUES (?, ?, NOW())';
   db.query(sql, [nombre, mensaje], (err, result) => {
-    if (err) return res.status(500).send('Error al guardar el mensaje.');
+    if (err) {
+      console.error('Error MySQL al guardar:', err);
+      return res.status(500).send('Error al guardar el mensaje.');
+    }
+    
     res.status(200).send('Mensaje guardado.');
   });
 });
 
 // Ruta para mostrar mensajes
 app.get('/mensajes', (req, res) => {
-  db.query('SELECT * FROM mensajes ORDER BY fecha DESC', (err, results) => {
+  db.query('SELECT * FROM libro_boda ORDER BY fecha DESC', (err, results) => {
     if (err) return res.status(500).send('Error al obtener los mensajes.');
     res.json(results);
   });
