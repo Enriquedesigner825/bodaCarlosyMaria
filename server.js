@@ -16,7 +16,7 @@ app.use(express.static('assets'));
 
 // Página principal
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'assets', 'acelebrar.html'));
+  res.sendFile(path.join(__dirname, 'assets', 'libro.html'));
 });
 
 // Conexión a la base de datos (variables de entorno)
