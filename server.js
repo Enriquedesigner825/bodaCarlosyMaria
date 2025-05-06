@@ -10,13 +10,19 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 // Middleware
-app.use(cors());
+app.use(cors({
+  origin: 'https://bodacarlosymaria.onrender.com', // cambia por tu URL real
+  methods: ['GET', 'POST']
+}));
+
 app.use(bodyParser.json());
-app.use(express.static('assets'));
+app.use(express.static(path.join(__dirname, 'assets', 'public_html')));  // Apuntar a 'assets/public_html'
+
 
 // Página principal
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'assets', 'libro.html'));
+  res.sendFile(path.join(__dirname, 'assets', 'public_html', 'libro.html'));  // Apuntar a 'assets/public_html'
+
 });
 
 // Conexión a la base de datos (variables de entorno)
