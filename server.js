@@ -31,33 +31,38 @@ const db = mysql.createConnection({
 
 db.connect(err => {
   if (err) {
-    console.error('Error conectando a la base de datos:', err);
+    console.error('❌ Error conectando a la base de datos:', err);
     return;
   }
-  console.log('Conexión a MySQL establecida');
+  console.log('✅ Conexión a MySQL establecida');
 });
 
 // Ruta para guardar mensaje
 app.post('/nuevo-mensaje', (req, res) => {
   const { nombre, mensaje } = req.body;
-  const sql = 'INSERT INTO mensajes (nombre, mensaje) VALUES (?, ?)';
+  const sql = 'INSERT INTO libro_boda (nombre, mensaje, fecha) VALUES (?, ?, NOW())';
   db.query(sql, [nombre, mensaje], (err, result) => {
-    if (err) return res.status(500).send('Error al guardar el mensaje.');
+    if (err) {
+      console.error('❌ Error al guardar el mensaje:', err);
+      return res.status(500).send('Error al guardar el mensaje.');
+    }
     res.status(200).send('Mensaje guardado.');
   });
 });
 
 // Ruta para mostrar mensajes
 app.get('/mensajes', (req, res) => {
-  db.query('SELECT * FROM mensajes ORDER BY fecha DESC', (err, results) => {
-    if (err) return res.status(500).send('Error al obtener los mensajes.');
+  const sql = 'SELECT * FROM libro_boda ORDER BY fecha DESC';
+  db.query(sql, (err, results) => {
+    if (err) {
+      console.error('❌ Error al obtener los mensajes:', err);
+      return res.status(500).send('Error al obtener los mensajes.');
+    }
     res.json(results);
   });
 });
 
 // Solo un listen
 app.listen(PORT, () => {
-  console.log(`Servidor corriendo en el puerto ${PORT}`);
+  console.log(`🚀 Servidor corriendo en el puerto ${PORT}`);
 });
-
-
