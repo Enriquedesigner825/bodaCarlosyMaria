@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Libro de visitas</title>
+    <link rel="stylesheet" href="/css/style.css">    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Libre+Baskerville:wght@700&family=Montserrat:wght@400;700&family=Rajdhani&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Charmonman:wght@400;700&family=Inter:wght@300;400;500;800&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="icon"  href="/faviconbodacarlos2.jpeg">
+
+
+
+</head>
+
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Libro de Visitas</title>
+    <!-- Agrega tus enlaces de CSS y otros archivos aquí -->
+</head>
+
+<body>
+
+    <header class="header">
+        <nav class="nav">
+            <img class="logo" src="/sin fondo.png" alt="">
+            <ul class="ul">
+                <li class="li"><a href="acelebrar.html" class="a"> ¡A CELEBRAR!</a></li>
+                <li class="li"><a href="laboda.html" class="a"> ¡LA BODA!</a></li>
+                <li class="li"><a href="asistencia.html" class="a"> CONFIRMA TU ASISTENCIA</a></li>
+                <li class="li"><a href="direcciones.html" class="a"> DIRECCIONES DE INTERÉS</a></li>
+                <li class="li"><a href="contacta.html" class="a"> CONTACTA CON NOSOTROS</a></li>
+                <li class="li"><a href="libro.html" class="a"> LIBRO DE VISITAS</a></li>
+            </ul>
+        </nav> 
+    </header>
+
+    <main>
+        <div class="container">           
+            <div class="libro">
+                <div class="adorno">
+                    <img src="/imagen_boda_carlos-removebg-preview.png" alt="">
+                </div>
+                <div class="comentarios">
+                    <h2>DEJA TU MENSAJE</h2>
+                    <h3>Te invitamos a firmar nuestro libro de visitas, así que puedes dejarnos un mensaje y presentarte al resto de invitados.</h3>
+                    <form id="comentarioForm">
+                        <input type="text" id="nombre" placeholder="Tu nombre" required />
+                        <br /><br />
+                        <textarea id="mensaje" placeholder="Escribe tu mensaje" required></textarea>
+                        <br /><br />
+                        <button type="submit">Enviar</button>
+                    </form>
+                    
+                    <h2>Mensajes:</h2>
+                    <div id="mensajes">
+                        <!-- Los mensajes se cargarán aquí -->
+                    </div>
+
+                    <script>
+                        const BACKEND_URL = 'https://bodacarlosymaria-backend.onrender.com';
+
+                        // Al enviar el formulario, se agrega el mensaje
+                        document.getElementById('comentarioForm').addEventListener('submit', async (e) => {
+                            e.preventDefault();
+                            
+                            const nombre = document.getElementById('nombre').value;
+                            const mensaje = document.getElementById('mensaje').value;
+
+                            console.log('Enviando datos:', { nombre, mensaje });  // Log para ver los datos enviados
+
+                            // Enviamos el mensaje al servidor
+                            const response = await fetch(`${BACKEND_URL}/nuevo-mensaje`, {
+                                method: 'POST',
+                                headers: { 'Content-Type': 'application/json' },
+                                body: JSON.stringify({ nombre, mensaje })
+                            });
+
+                            // Verificar si la respuesta es exitosa
+                            if (response.ok) {
+                                console.log('Mensaje enviado correctamente');
+                            } else {
+                                console.error('Error al enviar el mensaje');
+                            }
+
+                            // Limpiamos el formulario
+                            document.getElementById('nombre').value = '';
+                            document.getElementById('mensaje').value = '';
+                            
+                            // Volvemos a cargar los mensajes para mostrar el nuevo
+                            cargarMensajes();
+                        });
+
+                        // Función para cargar los mensajes desde el servidor
+                        async function cargarMensajes() {
+                            const res = await fetch(`${BACKEND_URL}/mensajes`);
+                            const data = await res.json(); // Asumimos que el backend devuelve los datos en formato JSON
+
+                            console.log('Mensajes recibidos del servidor:', data);  // Asegúrate de que los datos sean correctos
+
+                            const contenedorMensajes = document.getElementById('mensajes');
+                            contenedorMensajes.innerHTML = ''; // Limpiar mensajes previos
+
+                            // Iterar sobre los mensajes y mostrar en formato adecuado
+                            data.forEach(mensaje => {
+                                const mensajeElemento = document.createElement('p');
+                                // Añadir clase para aplicar estilos
+                                mensajeElemento.classList.add('mensaje');
+                                mensajeElemento.textContent = `${mensaje.nombre}: ${mensaje.mensaje} (Enviado el ${new Date(mensaje.fecha).toLocaleString()})`;
+
+                                contenedorMensajes.appendChild(mensajeElemento);
+                            });
+                        }
+
+                        // Cargar los mensajes al cargar la página
+                        cargarMensajes();
+                    </script>
+                </div>
+            </div>
+        </div>
+
+        <footer>María & Carlos</footer>
+    </main>
+</body>
+
+</html>
