@@ -1,0 +1,32 @@
+# Habilitar reescritura de URLs
+RewriteEngine On
+
+# Redirigir todas las solicitudes a index.html (si deseas que se vea acelebrar.html como página principal)
+RewriteCond %{REQUEST_URI} !^/index\.html$
+RewriteRule ^$ /index.html [L]
+
+# Evitar el acceso a archivos .htaccess y .env
+<Files .htaccess>
+    Order allow,deny
+    Deny from all
+</Files>
+
+<Files .env>
+    Order allow,deny
+    Deny from all
+</Files>
+
+# Forzar HTTPS (si estás usando SSL)
+RewriteCond %{HTTPS} off
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# Ajustes para evitar que archivos como .git sean accesibles
+<FilesMatch "\.(git|env|ini|bak)$">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+# Seguridad básica: Evitar el acceso a directorios
+Options -Indexes
+
+
