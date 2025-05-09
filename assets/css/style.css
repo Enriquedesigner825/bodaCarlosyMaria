@@ -565,7 +565,9 @@ button:hover {
       
       li {
         display: block;   /* Asegura que los elementos de la lista estén en bloque (por defecto ya lo están) */
-        padding-left: 10px;
+          /* Espacio entre los elementos */
+        padding: 10px;
+        
         text-align: center;
       }
       
