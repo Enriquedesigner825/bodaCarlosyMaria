@@ -14,49 +14,45 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(express.static('assets'));
 
-// Página principal
+// Página principal (asegúrate de que este sea tu archivo correcto)
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'assets', 'acelebrar.html'));
+  res.sendFile(path.join(__dirname, 'assets', 'libro.html'));  // 👈 Cambia a tu archivo real si no es 'libro.html'
 });
 
-// Conexión a la base de datos (reconexión automática)
-let db;
+// Conexión a la base de datos MySQL
+const pool = mysql.createPool({
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASS,
+  database: process.env.DB_NAME,
+  port: process.env.DB_PORT || 3306,
+  waitForConnections: true,
+  connectionLimit: 10,
+  queueLimit: 0
+});
 
-function connectDB() {
-  db = mysql.createConnection({
-    host: process.env.DB_HOST,
-    user: process.env.DB_USER,
-    password: process.env.DB_PASS,
-    database: process.env.DB_NAME,
-    port: process.env.DB_PORT || 3306
-  });
-
-  db.connect(err => {
-    if (err) {
-      console.error('❌ Error conectando a la base de datos:', err);
-      setTimeout(connectDB, 5000); // Reintenta en 5 segundos
-    } else {
-      console.log('✅ Conexión a MySQL establecida');
-    }
-  });
-
-  db.on('error', err => {
-    console.error('❌ Error de conexión:', err);
-    if (err.code === 'PROTOCOL_CONNECTION_LOST') {
-      connectDB(); // Reconecta
-    } else {
-      throw err;
-    }
-  });
-}
-
-connectDB();
+// Verificamos la conexión al arrancar
+pool.getConnection((err, connection) => {
+  if (err) {
+    console.error('❌ Error conectando a MySQL:', err);
+  } else {
+    console.log('✅ Conexión a MySQL establecida');
+    connection.release();
+  }
+});
 
 // Ruta para guardar mensaje
 app.post('/nuevo-mensaje', (req, res) => {
   const { nombre, mensaje } = req.body;
-  const sql = 'INSERT INTO libro_boda (nombre, mensaje) VALUES (?, ?)';
-  db.query(sql, [nombre, mensaje], (err, result) => {
+
+  // Validamos que haya contenido
+  if (!nombre || !mensaje) {
+    return res.status(400).send('Nombre y mensaje son obligatorios.');
+  }
+
+  const sql = 'INSERT INTO libro_boda (nombre, mensaje, fecha) VALUES (?, ?, NOW())';
+
+  pool.query(sql, [nombre, mensaje], (err, results) => {
     if (err) {
       console.error('❌ Error al guardar el mensaje:', err);
       return res.status(500).send('Error al guardar el mensaje.');
@@ -67,7 +63,9 @@ app.post('/nuevo-mensaje', (req, res) => {
 
 // Ruta para mostrar mensajes
 app.get('/mensajes', (req, res) => {
-  db.query('SELECT * FROM libro_boda ORDER BY fecha DESC', (err, results) => {
+  const sql = 'SELECT * FROM libro_boda ORDER BY fecha DESC';
+
+  pool.query(sql, (err, results) => {
     if (err) {
       console.error('❌ Error al obtener los mensajes:', err);
       return res.status(500).send('Error al obtener los mensajes.');
@@ -76,7 +74,7 @@ app.get('/mensajes', (req, res) => {
   });
 });
 
-// Solo un listen
+// Arrancamos el servidor
 app.listen(PORT, () => {
   console.log(`🚀 Servidor corriendo en el puerto ${PORT}`);
 });
