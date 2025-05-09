@@ -6,31 +6,35 @@
     <title>Libro de visitas</title>
     <link rel="stylesheet" href="/css/style.css">    
     <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Libre+Baskerville:wght@700&family=Montserrat:wght@400;700&family=Rajdhani&display=swap" rel="stylesheet">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Charmonman:wght@400;700&family=Inter:wght@300;400;500;800&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-<link rel="icon"  href="/faviconbodacarlos2.jpeg">
-
-
-
-</head>
-
-<!DOCTYPE html>
-<html lang="es">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Libro de Visitas</title>
-    <!-- Agrega tus enlaces de CSS y otros archivos aquí -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Libre+Baskerville:wght@700&family=Montserrat:wght@400;700&family=Rajdhani&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Charmonman:wght@400;700&family=Inter:wght@300;400;500;800&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="icon" href="/faviconbodacarlos2.jpeg">
+    <style>
+        .mensaje {
+            margin: 10px 0;
+            padding: 10px;
+            background: #f7f7f7;
+            border-radius: 8px;
+        }
+        .feedback {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        .feedback.ok {
+            color: green;
+        }
+        .feedback.error {
+            color: red;
+        }
+    </style>
 </head>
 
 <body>
-
     <header class="header">
         <nav class="nav">
             <img class="logo" src="/sin fondo.png" alt="">
@@ -60,6 +64,7 @@
                         <textarea id="mensaje" placeholder="Escribe tu mensaje" required></textarea>
                         <br /><br />
                         <button type="submit">Enviar</button>
+                        <div id="feedback" class="feedback"></div>
                     </form>
                     
                     <h2>Mensajes:</h2>
@@ -68,61 +73,74 @@
                     </div>
 
                     <script>
-                        const BACKEND_URL = 'https://bodacarlosymaria-backend.onrender.com';
+                        const BACKEND_URL = 'https://bodacarlosymaria-backend.onrender.com';  // ✅ Cambia si tu backend está en otro sitio
 
-                        // Al enviar el formulario, se agrega el mensaje
-                        document.getElementById('comentarioForm').addEventListener('submit', async (e) => {
+                        const form = document.getElementById('comentarioForm');
+                        const feedback = document.getElementById('feedback');
+
+                        form.addEventListener('submit', async (e) => {
                             e.preventDefault();
                             
-                            const nombre = document.getElementById('nombre').value;
-                            const mensaje = document.getElementById('mensaje').value;
+                            const nombre = document.getElementById('nombre').value.trim();
+                            const mensaje = document.getElementById('mensaje').value.trim();
 
-                            console.log('Enviando datos:', { nombre, mensaje });  // Log para ver los datos enviados
-
-                            // Enviamos el mensaje al servidor
-                            const response = await fetch(`${BACKEND_URL}/nuevo-mensaje`, {
-                                method: 'POST',
-                                headers: { 'Content-Type': 'application/json' },
-                                body: JSON.stringify({ nombre, mensaje })
-                            });
-
-                            // Verificar si la respuesta es exitosa
-                            if (response.ok) {
-                                console.log('Mensaje enviado correctamente');
-                            } else {
-                                console.error('Error al enviar el mensaje');
+                            if (!nombre || !mensaje) {
+                                feedback.textContent = 'Por favor completa todos los campos.';
+                                feedback.className = 'feedback error';
+                                return;
                             }
 
-                            // Limpiamos el formulario
-                            document.getElementById('nombre').value = '';
-                            document.getElementById('mensaje').value = '';
-                            
-                            // Volvemos a cargar los mensajes para mostrar el nuevo
-                            cargarMensajes();
+                            try {
+                                const response = await fetch(`${BACKEND_URL}/nuevo-mensaje`, {
+                                    method: 'POST',
+                                    headers: { 'Content-Type': 'application/json' },
+                                    body: JSON.stringify({ nombre, mensaje })
+                                });
+
+                                if (response.ok) {
+                                    feedback.textContent = '✅ ¡Mensaje enviado correctamente!';
+                                    feedback.className = 'feedback ok';
+                                    form.reset();
+                                    cargarMensajes();
+                                } else {
+                                    feedback.textContent = '❌ Hubo un error al enviar el mensaje.';
+                                    feedback.className = 'feedback error';
+                                }
+                            } catch (error) {
+                                console.error('Error:', error);
+                                feedback.textContent = '❌ Error de red o servidor.';
+                                feedback.className = 'feedback error';
+                            }
                         });
 
-                        // Función para cargar los mensajes desde el servidor
                         async function cargarMensajes() {
-                            const res = await fetch(`${BACKEND_URL}/mensajes`);
-                            const data = await res.json(); // Asumimos que el backend devuelve los datos en formato JSON
-
-                            console.log('Mensajes recibidos del servidor:', data);  // Asegúrate de que los datos sean correctos
-
                             const contenedorMensajes = document.getElementById('mensajes');
-                            contenedorMensajes.innerHTML = ''; // Limpiar mensajes previos
+                            contenedorMensajes.innerHTML = 'Cargando mensajes...';
 
-                            // Iterar sobre los mensajes y mostrar en formato adecuado
-                            data.forEach(mensaje => {
-                                const mensajeElemento = document.createElement('p');
-                                // Añadir clase para aplicar estilos
-                                mensajeElemento.classList.add('mensaje');
-                                mensajeElemento.textContent = `${mensaje.nombre}: ${mensaje.mensaje} (Enviado el ${new Date(mensaje.fecha).toLocaleString()})`;
+                            try {
+                                const res = await fetch(`${BACKEND_URL}/mensajes`);
+                                const data = await res.json();
 
-                                contenedorMensajes.appendChild(mensajeElemento);
-                            });
+                                contenedorMensajes.innerHTML = ''; // Limpiar mensajes previos
+
+                                if (data.length === 0) {
+                                    contenedorMensajes.textContent = 'No hay mensajes aún. Sé el primero en escribir uno ✍️!';
+                                    return;
+                                }
+
+                                data.forEach(mensaje => {
+                                    const mensajeElemento = document.createElement('div');
+                                    mensajeElemento.classList.add('mensaje');
+                                    mensajeElemento.textContent = `${mensaje.nombre}: ${mensaje.mensaje} (Enviado el ${new Date(mensaje.fecha).toLocaleString()})`;
+                                    contenedorMensajes.appendChild(mensajeElemento);
+                                });
+                            } catch (err) {
+                                console.error('Error al cargar los mensajes:', err);
+                                contenedorMensajes.textContent = '❌ Error al cargar los mensajes.';
+                            }
                         }
 
-                        // Cargar los mensajes al cargar la página
+                        // Cargar los mensajes al abrir la página
                         cargarMensajes();
                     </script>
                 </div>
@@ -132,5 +150,5 @@
         <footer>María & Carlos</footer>
     </main>
 </body>
-
 </html>
+
