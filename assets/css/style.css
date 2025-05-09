@@ -556,6 +556,12 @@ button:hover {
 /*fin libro de visitas*/
 
 @media screen and (max-width: 480px) {
+    .nav .ul{
+        display: block;
+        
+        }
+       
+      
     
     .logo{   
         margin-left: 23%;  
