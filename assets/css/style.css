@@ -592,6 +592,9 @@ button:hover {
     .celebrar img{
         width: 70vw;
     }
+    .celebrar h2{
+        font-size: 2em;
+    }
     .fecha h3{
         font-size: 1.875em;
     }
