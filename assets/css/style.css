@@ -49,7 +49,7 @@ h1,h2,h3,h4,h5,h6 {
 
 .titulo h1{
     font-size: 4.375em;
-    color: #090303;
+    color: #e0e0e0;
     justify-content: center;
     display: flex;
     padding: 4em;
