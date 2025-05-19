@@ -36,7 +36,7 @@ h1,h2,h3,h4,h5,h6 {
 }
  
 .titulo{
-    background-image: url(/principal2.jpeg) ;
+    background-image: url(/portada.jpeg) ;
     height: 100vh;
     width: 100vw;
     background-size: cover;
@@ -49,7 +49,7 @@ h1,h2,h3,h4,h5,h6 {
 
 .titulo h1{
     font-size: 4.375em;
-    color: #fbf8f8;
+    color: #090303;
     justify-content: center;
     display: flex;
     padding: 4em;
@@ -130,6 +130,8 @@ padding: 1em;
     width: 30vw;
     height: 70vh;
     box-shadow: 0 0 0.5em 0.5em; 
+    object-fit: cover;
+  object-position: bottom;
 }
 .descripcion{
     font-size: 1.6875em;
