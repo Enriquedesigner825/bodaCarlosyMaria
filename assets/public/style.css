@@ -1,0 +1,14 @@
+
+@font-face {
+  font-family: 'Charmonman';
+  src: url('fonts/Charmonman-Regular.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+
+body {
+  font-family: 'Charmonman', cursive;
+  background-color: #fff8f0;
+  padding: 2rem;
+  font-size: 1.2rem;
+}
